@@ -51,24 +51,6 @@ class ProofKeyForCodeExchange
     }
 
     /**
-     * Verify a PKCE code challenge.
-     *
-     * @param CodeChallenge $codeChallenge The code challenge to verify.
-     *
-     * @return bool Returns `true` if the code challenge is valid, `false` otherwise.
-     */
-    public function verifyCodeChallenge(CodeChallenge $codeChallenge): bool
-    {
-        $method = $this->challengeMethods[$codeChallenge->method] ?? throw new UnsupportedCodeChallengeMethodException($codeChallenge->method);
-
-        if (\preg_match(self::ABNF_CODE_VERIFIER, $codeChallenge->verifier) !== 1) {
-            throw new InvalidCodeVerifierException();
-        }
-
-        return $method->verifyCodeChallenge($codeChallenge->verifier, $codeChallenge->challenge);
-    }
-
-    /**
      * Create a PKCE code challenge.
      *
      * @param string $method The code challenge method to use.
@@ -88,6 +70,26 @@ class ProofKeyForCodeExchange
             $method->createCodeChallenge($codeVerifier),
             $codeVerifier
         );
+    }
+
+    /**
+     * Verify a PKCE code challenge.
+     *
+     * This method is for **AUTHORIZATION SERVERS**.
+     *
+     * @param CodeChallenge $codeChallenge The code challenge to verify.
+     *
+     * @return bool Returns `true` if the code challenge is valid, `false` otherwise.
+     */
+    public function verifyCodeChallenge(CodeChallenge $codeChallenge): bool
+    {
+        $method = $this->challengeMethods[$codeChallenge->method] ?? throw new UnsupportedCodeChallengeMethodException($codeChallenge->method);
+
+        if (\preg_match(self::ABNF_CODE_VERIFIER, $codeChallenge->verifier) !== 1) {
+            throw new InvalidCodeVerifierException();
+        }
+
+        return $method->verifyCodeChallenge($codeChallenge->verifier, $codeChallenge->challenge);
     }
 
     /**

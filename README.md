@@ -18,7 +18,7 @@ composer require danielburger1337/oauth2-pkce
 
 ## Documentation
 
-Todo
+You can find the documentation [here](docs/README.md).
 
 ## Running Tests Locally
 

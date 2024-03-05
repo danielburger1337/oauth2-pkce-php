@@ -23,7 +23,7 @@ class ProofKeyForCodeExchange
 
     /**
      * @param iterable<CodeChallengeMethodInterface> $challengeMethods [optional] The supported code challenge methods.
-     * @param int<1,max>                             $challengeLength  [optional] The number of bytes that are randomly generated.
+     * @param int<22,64>                             $challengeLength  [optional] The number of bytes that are randomly generated.
      *                                                                 ASCII length of the created challenge will be n*2.
      */
     public function __construct(

@@ -6,7 +6,7 @@ use Base64Url\Base64Url;
 
 final class S256ChallengeMethod implements CodeChallengeMethodInterface
 {
-    public const string METHOD_NAME = 'S256';
+    public const METHOD_NAME = 'S256';
 
     public function getName(): string
     {

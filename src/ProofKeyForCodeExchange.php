@@ -13,10 +13,10 @@ use danielburger1337\OAuth2\PKCE\Model\CodeChallenge;
 class ProofKeyForCodeExchange
 {
     /** @see https://tools.ietf.org/html/rfc7636#section-4.1 */
-    final public const string ABNF_CODE_VERIFIER = '/^[A-Za-z0-9-._~]{43,128}$/';
+    final public const ABNF_CODE_VERIFIER = '/^[A-Za-z0-9-._~]{43,128}$/';
 
     /** @see https://tools.ietf.org/html/rfc7636#section-4.2 */
-    final public const string ABNF_CODE_CHALLENGE = '/^[A-Za-z0-9-._~]{43,128}$/';
+    final public const ABNF_CODE_CHALLENGE = '/^[A-Za-z0-9-._~]{43,128}$/';
 
     /** @var array<string, CodeChallengeMethodInterface> */
     private readonly array $challengeMethods;

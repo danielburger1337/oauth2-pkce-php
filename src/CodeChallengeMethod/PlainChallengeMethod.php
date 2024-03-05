@@ -4,7 +4,7 @@ namespace danielburger1337\OAuth2\PKCE\CodeChallengeMethod;
 
 final class PlainChallengeMethod implements CodeChallengeMethodInterface
 {
-    public const string METHOD_NAME = 'plain';
+    public const METHOD_NAME = 'plain';
 
     public function getName(): string
     {

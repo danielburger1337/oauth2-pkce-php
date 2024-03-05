@@ -7,7 +7,6 @@ use danielburger1337\OAuth2\PKCE\CodeChallengeMethod\S256ChallengeMethod;
 use danielburger1337\OAuth2\PKCE\Exception\InvalidCodeChallengeException;
 use danielburger1337\OAuth2\PKCE\Exception\InvalidCodeVerifierException;
 use danielburger1337\OAuth2\PKCE\Exception\UnsupportedCodeChallengeMethodException;
-use danielburger1337\OAuth2\PKCE\Model\CodeChallenge;
 use danielburger1337\OAuth2\PKCE\ProofKeyForCodeExchange;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -135,7 +134,7 @@ class ProofKeyForCodeExchangeTest extends TestCase
     }
 
     /**
-     * @return array<array{0: CodeChallenge, 1: bool}>
+     * @return array<array{0: string, 1: string, 2: string, 3: bool}>
      */
     public static function dataProvider_verifyCodeChallenge(): array
     {

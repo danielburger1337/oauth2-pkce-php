@@ -77,19 +77,21 @@ class ProofKeyForCodeExchange
      *
      * This method is for **AUTHORIZATION SERVERS**.
      *
-     * @param CodeChallenge $codeChallenge The code challenge to verify.
+     * @param string $method    The "code_challenge_method" that was used to create the "code_challenge".
+     * @param string $challenge The "code_challenge" to verify.
+     * @param string $verifier  The "code_verifier" to verify against the "code_challenge".
      *
      * @return bool Returns `true` if the code challenge is valid, `false` otherwise.
      */
-    public function verifyCodeChallenge(CodeChallenge $codeChallenge): bool
+    public function verifyCodeChallenge(string $method, string $challenge, string $verifier): bool
     {
-        $method = $this->challengeMethods[$codeChallenge->method] ?? throw new UnsupportedCodeChallengeMethodException($codeChallenge->method);
+        $method = $this->challengeMethods[$method] ?? throw new UnsupportedCodeChallengeMethodException($method);
 
-        if (\preg_match(self::ABNF_CODE_VERIFIER, $codeChallenge->verifier) !== 1) {
+        if (\preg_match(self::ABNF_CODE_VERIFIER, $verifier) !== 1) {
             throw new InvalidCodeVerifierException();
         }
 
-        return $method->verifyCodeChallenge($codeChallenge->verifier, $codeChallenge->challenge);
+        return $method->verifyCodeChallenge($verifier, $challenge);
     }
 
     /**

@@ -37,13 +37,11 @@ class ProofKeyForCodeExchangeTest extends TestCase
     }
 
     #[Test]
-    public function verifyCodeChallenge_invalidlyFormattedChallenge_throwsException(): void
+    public function verifyCodeChallenge_invalidlyFormattedVerifier_throwsException(): void
     {
         $this->expectException(InvalidCodeVerifierException::class);
 
-        $codeChallenge = new CodeChallenge('plain', 'abcdef', 'abcedf');
-
-        $this->pkce->verifyCodeChallenge($codeChallenge);
+        $this->pkce->verifyCodeChallenge('plain', 'abcdef', 'abcdef');
     }
 
     #[Test]
@@ -51,16 +49,14 @@ class ProofKeyForCodeExchangeTest extends TestCase
     {
         $this->expectException(UnsupportedCodeChallengeMethodException::class);
 
-        $codeChallenge = new CodeChallenge('unsupported', 'abcdef', 'abcedf');
-
-        $this->pkce->verifyCodeChallenge($codeChallenge);
+        $this->pkce->verifyCodeChallenge('unsupported', 'abcdef', 'abcdef');
     }
 
     #[Test]
     #[DataProvider('dataProvider_verifyCodeChallenge')]
-    public function verifyCodeChallenge_returnsExpected(CodeChallenge $codeChallenge, bool $expected): void
+    public function verifyCodeChallenge_returnsExpected(string $method, string $challenge, string $verifier, bool $expected): void
     {
-        $returnValue = $this->pkce->verifyCodeChallenge($codeChallenge);
+        $returnValue = $this->pkce->verifyCodeChallenge($method, $challenge, $verifier);
 
         $this->assertEquals($expected, $returnValue);
     }
@@ -144,14 +140,14 @@ class ProofKeyForCodeExchangeTest extends TestCase
     public static function dataProvider_verifyCodeChallenge(): array
     {
         return [
-            [new CodeChallenge('S256', 'GdaOtJJqQ1lbOFDMWTm96Ss04V0DSzp5FjGg6cHgc80', 'abcdefefghijklmnopqrstuvwxyzabcdefefghijklmnopqrstuvwxyz'), true],
-            [new CodeChallenge('S256', 'invalid', 'abcdefefghijklmnopqrstuvwxyzabcdefefghijklmnopqrstuvwxyz'), false],
+            ['S256', 'GdaOtJJqQ1lbOFDMWTm96Ss04V0DSzp5FjGg6cHgc80', 'abcdefefghijklmnopqrstuvwxyzabcdefefghijklmnopqrstuvwxyz', true],
+            ['S256', 'invalid', 'abcdefefghijklmnopqrstuvwxyzabcdefefghijklmnopqrstuvwxyz', false],
 
-            [new CodeChallenge('S256', 'dshwMd3H9tjQRewmXnkZBkc39-vHzyrIqmrppSrw4IE', 'wanfiwnafiwnr902nmf902mfien90812qjniwfanfiw'), true],
-            [new CodeChallenge('S256', 'otherInvalid', 'wanfiwnafiwnr902nmf902mfien90812qjniwfanfiw'), false],
+            ['S256', 'dshwMd3H9tjQRewmXnkZBkc39-vHzyrIqmrppSrw4IE', 'wanfiwnafiwnr902nmf902mfien90812qjniwfanfiw', true],
+            ['S256', 'otherInvalid', 'wanfiwnafiwnr902nmf902mfien90812qjniwfanfiw', false],
 
-            [new CodeChallenge('plain', 'abcdefefghijklmnopqrstuvwxyzabcdefefghijklmnopqrstuvwxyz', 'abcdefefghijklmnopqrstuvwxyzabcdefefghijklmnopqrstuvwxyz'), true],
-            [new CodeChallenge('plain', 'otherOtherInvalid', 'wanfiwnafiwnr902nmf902mfien90812qjniwfanfiw'), false],
+            ['plain', 'abcdefefghijklmnopqrstuvwxyzabcdefefghijklmnopqrstuvwxyz', 'abcdefefghijklmnopqrstuvwxyzabcdefefghijklmnopqrstuvwxyz', true],
+            ['plain', 'otherOtherInvalid', 'wanfiwnafiwnr902nmf902mfien90812qjniwfanfiw', false],
         ];
     }
 }

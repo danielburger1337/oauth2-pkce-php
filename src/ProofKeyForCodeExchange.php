@@ -31,7 +31,7 @@ class ProofKeyForCodeExchange
             new S256ChallengeMethod(),
             new PlainChallengeMethod(),
         ],
-        private readonly int $challengeLength = 32
+        private readonly int $challengeLength = 32,
     ) {
         $map = [];
         foreach ($challengeMethods as $method) {

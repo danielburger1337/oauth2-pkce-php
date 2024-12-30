@@ -15,7 +15,7 @@ final class CodeChallenge
     public function __construct(
         public readonly string $method,
         public readonly string $challenge,
-        public readonly string $verifier
+        public readonly string $verifier,
     ) {
     }
 }

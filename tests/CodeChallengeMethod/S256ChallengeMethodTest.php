@@ -19,13 +19,13 @@ class S256ChallengeMethodTest extends TestCase
     }
 
     #[Test]
-    public function methodNameConstant_returnsS256(): void
+    public function methodNameConstantReturnsS256(): void
     {
         $this->assertEquals('S256', S256ChallengeMethod::METHOD_NAME);
     }
 
     #[Test]
-    public function getName_returnsS256(): void
+    public function getNameReturnsS256(): void
     {
         $returnValue = $this->method->getName();
 
@@ -34,7 +34,7 @@ class S256ChallengeMethodTest extends TestCase
 
     #[Test]
     #[DataProvider('dataProvider_createCodeChallenge')]
-    public function createCodeChallenge_returnsSha256Hash(string $codeVerifier, string $expected): void
+    public function createCodeChallengeReturnsSha256Hash(string $codeVerifier, string $expected): void
     {
         $returnValue = $this->method->createCodeChallenge($codeVerifier);
 
@@ -43,7 +43,7 @@ class S256ChallengeMethodTest extends TestCase
 
     #[Test]
     #[DataProvider('dataProvider_verifyCodeChallenge')]
-    public function verifyCodeChallenge_returnsExpected(string $codeVerifier, string $codeChallenge, bool $expected): void
+    public function verifyCodeChallengeReturnsExpected(string $codeVerifier, string $codeChallenge, bool $expected): void
     {
         $returnValue = $this->method->verifyCodeChallenge($codeVerifier, $codeChallenge);
 

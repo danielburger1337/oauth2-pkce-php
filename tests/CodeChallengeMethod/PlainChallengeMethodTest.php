@@ -19,13 +19,13 @@ class PlainChallengeMethodTest extends TestCase
     }
 
     #[Test]
-    public function methodNameConstant_returnsPlain(): void
+    public function methodNameConstantReturnsPlain(): void
     {
         $this->assertEquals('plain', PlainChallengeMethod::METHOD_NAME);
     }
 
     #[Test]
-    public function getName_returnsPlain(): void
+    public function getNameReturnsPlain(): void
     {
         $returnValue = $this->method->getName();
 
@@ -34,7 +34,7 @@ class PlainChallengeMethodTest extends TestCase
 
     #[Test]
     #[DataProvider('dataProvider_createCodeChallenge')]
-    public function createCodeChallenge_returnsWithoutModification(string $codeVerifier, string $expected): void
+    public function createCodeChallengeReturnsWithoutModification(string $codeVerifier, string $expected): void
     {
         $returnValue = $this->method->createCodeChallenge($codeVerifier);
 
@@ -43,7 +43,7 @@ class PlainChallengeMethodTest extends TestCase
 
     #[Test]
     #[DataProvider('dataProvider_verifyCodeChallenge')]
-    public function verifyCodeChallenge_returnsExpected(string $codeVerifier, string $codeChallenge, bool $expected): void
+    public function verifyCodeChallengeReturnsExpected(string $codeVerifier, string $codeChallenge, bool $expected): void
     {
         $returnValue = $this->method->verifyCodeChallenge($codeVerifier, $codeChallenge);
 

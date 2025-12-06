@@ -6,7 +6,7 @@
 
 # danielburger1337/oauth2-pkce
 
-A PHP 8.2+ library that helps you both create and/or verify [OAuth2 PKCE](https://datatracker.ietf.org/doc/html/rfc7636) challenges.
+A PHP library that helps you both create and verify [OAuth2 PKCE](https://datatracker.ietf.org/doc/html/rfc7636) challenges.
 
 ## Install
 

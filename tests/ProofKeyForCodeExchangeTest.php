@@ -28,7 +28,7 @@ class ProofKeyForCodeExchangeTest extends TestCase
      */
     #[Test]
     #[DataProvider('dataProivder_getSupportedCodeChallengeMethods')]
-    public function getSupportedCodeChallengeMethods_returnsExpected(ProofKeyForCodeExchange $pkce, array $expected): void
+    public function getSupportedCodeChallengeMethodsReturnsExpected(ProofKeyForCodeExchange $pkce, array $expected): void
     {
         $returnValue = $pkce->getSupportedCodeChallengeMethods();
 
@@ -36,7 +36,7 @@ class ProofKeyForCodeExchangeTest extends TestCase
     }
 
     #[Test]
-    public function verifyCodeChallenge_invalidlyFormattedVerifier_throwsException(): void
+    public function verifyCodeChallengeInvalidlyFormattedVerifierThrowsException(): void
     {
         $this->expectException(InvalidCodeVerifierException::class);
 
@@ -44,7 +44,7 @@ class ProofKeyForCodeExchangeTest extends TestCase
     }
 
     #[Test]
-    public function verifyCodeChallenge_unsupportedMethod_throwsException(): void
+    public function verifyCodeChallengeUnsupportedMethodThrowsException(): void
     {
         $this->expectException(UnsupportedCodeChallengeMethodException::class);
 
@@ -53,7 +53,7 @@ class ProofKeyForCodeExchangeTest extends TestCase
 
     #[Test]
     #[DataProvider('dataProvider_verifyCodeChallenge')]
-    public function verifyCodeChallenge_returnsExpected(string $method, string $challenge, string $verifier, bool $expected): void
+    public function verifyCodeChallengeReturnsExpected(string $method, string $challenge, string $verifier, bool $expected): void
     {
         $returnValue = $this->pkce->verifyCodeChallenge($method, $challenge, $verifier);
 
@@ -61,7 +61,7 @@ class ProofKeyForCodeExchangeTest extends TestCase
     }
 
     #[Test]
-    public function createCodeChallenge_unsupportedMethod_throwsException(): void
+    public function createCodeChallengeUnsupportedMethodThrowsException(): void
     {
         $this->expectException(UnsupportedCodeChallengeMethodException::class);
 
@@ -69,7 +69,7 @@ class ProofKeyForCodeExchangeTest extends TestCase
     }
 
     #[Test]
-    public function createCodeChallenge_codeChallenge_hasExpectedLength(): void
+    public function createCodeChallengeCodeChallengeHasExpectedLength(): void
     {
         $pkce = new ProofKeyForCodeExchange([new PlainChallengeMethod()], 28);
 
@@ -79,7 +79,7 @@ class ProofKeyForCodeExchangeTest extends TestCase
     }
 
     #[Test]
-    public function createCodeChallenge_plain_isExpected(): void
+    public function createCodeChallengePlainIsExpected(): void
     {
         $returnValue = $this->pkce->createCodeChallenge('plain');
 
@@ -88,7 +88,7 @@ class ProofKeyForCodeExchangeTest extends TestCase
     }
 
     #[Test]
-    public function createCodeChallenge_S256_isExpected(): void
+    public function createCodeChallengeS256IsExpected(): void
     {
         $returnValue = $this->pkce->createCodeChallenge('S256');
 
@@ -97,7 +97,7 @@ class ProofKeyForCodeExchangeTest extends TestCase
     }
 
     #[Test]
-    public function ensureCodeChallengeIsAllowed_unsupportedMethod_throwsException(): void
+    public function ensureCodeChallengeIsAllowedUnsupportedMethodThrowsException(): void
     {
         $this->expectException(UnsupportedCodeChallengeMethodException::class);
 
@@ -105,7 +105,7 @@ class ProofKeyForCodeExchangeTest extends TestCase
     }
 
     #[Test]
-    public function ensureCodeChallengeIsAllowed_invalidCodeChallengeFormat_throwsException(): void
+    public function ensureCodeChallengeIsAllowedInvalidCodeChallengeFormatThrowsException(): void
     {
         $this->expectException(InvalidCodeChallengeException::class);
 
@@ -113,7 +113,7 @@ class ProofKeyForCodeExchangeTest extends TestCase
     }
 
     #[Test]
-    public function ensureCodeChallengeIsAllowed_hasNoError(): void
+    public function ensureCodeChallengeIsAllowedHasNoError(): void
     {
         $this->expectNotToPerformAssertions();
 
